@@ -1,0 +1,11 @@
+F:\Projects\bootloader_pc_app\bootlaoder_pc_app\bootlaoder_pc_app\bin\Debug\bootlaoder_pc_app.exe.config
+F:\Projects\bootloader_pc_app\bootlaoder_pc_app\bootlaoder_pc_app\bin\Debug\bootlaoder_pc_app.exe
+F:\Projects\bootloader_pc_app\bootlaoder_pc_app\bootlaoder_pc_app\bin\Debug\bootlaoder_pc_app.pdb
+F:\Projects\bootloader_pc_app\bootlaoder_pc_app\bootlaoder_pc_app\obj\Debug\bootlaoder_pc_app.csproj.AssemblyReference.cache
+F:\Projects\bootloader_pc_app\bootlaoder_pc_app\bootlaoder_pc_app\obj\Debug\bootlaoder_pc_app.csproj.SuggestedBindingRedirects.cache
+F:\Projects\bootloader_pc_app\bootlaoder_pc_app\bootlaoder_pc_app\obj\Debug\bootlaoder_pc_app.Form1.resources
+F:\Projects\bootloader_pc_app\bootlaoder_pc_app\bootlaoder_pc_app\obj\Debug\bootlaoder_pc_app.Properties.Resources.resources
+F:\Projects\bootloader_pc_app\bootlaoder_pc_app\bootlaoder_pc_app\obj\Debug\bootlaoder_pc_app.csproj.GenerateResource.cache
+F:\Projects\bootloader_pc_app\bootlaoder_pc_app\bootlaoder_pc_app\obj\Debug\bootlaoder_pc_app.csproj.CoreCompileInputs.cache
+F:\Projects\bootloader_pc_app\bootlaoder_pc_app\bootlaoder_pc_app\obj\Debug\bootlaoder_pc_app.exe
+F:\Projects\bootloader_pc_app\bootlaoder_pc_app\bootlaoder_pc_app\obj\Debug\bootlaoder_pc_app.pdb

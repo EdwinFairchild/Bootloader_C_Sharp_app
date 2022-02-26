@@ -1,0 +1,16 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "6b713cf2-b92d-4749-ac7b-c3621b12a964": {
+      "ProjectGuid": "6b713cf2-b92d-4749-ac7b-c3621b12a964",
+      "DisplayName": "bootlaoder_pc_app",
+      "ColorIndex": 0
+    },
+    "a2fe74e1-b743-11d0-ae1a-00a0c90fffc3": {
+      "ProjectGuid": "a2fe74e1-b743-11d0-ae1a-00a0c90fffc3",
+      "DisplayName": "Miscellaneous Files",
+      "ColorIndex": -1
+    }
+  },
+  "NextColorIndex": 1
+}

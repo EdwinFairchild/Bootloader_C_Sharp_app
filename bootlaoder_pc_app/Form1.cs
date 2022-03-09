@@ -114,7 +114,7 @@ namespace bootlaoder_pc_app
         }
         private void sendFirmware(object sender, EventArgs e)
         {
-
+            //TODO refactor this puppy
             //this function will send the next frame packet containing the next block of
             //firmware data
             //it should only be called once everytime we receive an ACK that previous packet was received 
@@ -255,30 +255,6 @@ namespace bootlaoder_pc_app
             //send the frame to start an update
             assemble_tx_frame_from_id(BL_START_UPDATE);
             serialize_tx_frame_down_port(tx_frame);
-            //if (port.IsOpen)
-            //{
-            //    //SOF uint32
-            //    byte[] data = BitConverter.GetBytes(tx_frame.start_of_frame);
-            //    port.Write(data, 0, 4);
-            //    // frmae id uint32
-            //    data = BitConverter.GetBytes(tx_frame.frame_id);
-            //    port.Write(data, 0, 4);
-
-            //    //frame len uint16
-            //    data = BitConverter.GetBytes(tx_frame.frame_len);
-            //    port.Write(data, 0, 2);
-
-            //    //tx_payload 16 
-            //    port.Write(rx_payload, 0, 16);
-
-            //    //crc uint32
-            //    data = BitConverter.GetBytes(tx_frame.crc);
-            //    port.Write(data, 0, 4);
-
-            //    //end of frame uint32
-            //    data = BitConverter.GetBytes(tx_frame.end_of_frame);
-            //    port.Write(data, 0, 4);
-            //}
 
         }
 
@@ -382,14 +358,6 @@ namespace bootlaoder_pc_app
             }
         }
 
-        private void label1_Click(object sender, EventArgs e)
-        {
 
-        }
-
-        private void groupBox1_Enter(object sender, EventArgs e)
-        {
-
-        }
     }
 }

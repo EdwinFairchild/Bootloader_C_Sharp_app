@@ -121,7 +121,6 @@
             this.label1.Size = new System.Drawing.Size(134, 40);
             this.label1.TabIndex = 8;
             this.label1.Text = "Bytes :";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // label2
             // 
@@ -156,14 +155,13 @@
             this.groupBox1.Size = new System.Drawing.Size(238, 370);
             this.groupBox1.TabIndex = 11;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(144F, 144F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(832, 598);
+            this.ClientSize = new System.Drawing.Size(819, 611);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.btnFlash);

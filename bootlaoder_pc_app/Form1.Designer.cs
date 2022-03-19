@@ -32,7 +32,6 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.port = new System.IO.Ports.SerialPort(this.components);
             this.btn_conenct = new System.Windows.Forms.Button();
-            this.rtb = new System.Windows.Forms.RichTextBox();
             this.btnFlash = new System.Windows.Forms.Button();
             this.lblcount = new System.Windows.Forms.Label();
             this.lblAcksCount = new System.Windows.Forms.Label();
@@ -40,6 +39,9 @@
             this.label2 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.filebox = new System.Windows.Forms.OpenFileDialog();
+            this.fileBtn = new System.Windows.Forms.Button();
+            this.txtFilePath = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -63,17 +65,6 @@
             this.btn_conenct.Text = "Connect";
             this.btn_conenct.UseVisualStyleBackColor = true;
             this.btn_conenct.Click += new System.EventHandler(this.btn_conenct_Click);
-            // 
-            // rtb
-            // 
-            this.rtb.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rtb.Location = new System.Drawing.Point(47, 432);
-            this.rtb.Margin = new System.Windows.Forms.Padding(0);
-            this.rtb.Name = "rtb";
-            this.rtb.Size = new System.Drawing.Size(735, 124);
-            this.rtb.TabIndex = 3;
-            this.rtb.Text = "";
-            this.rtb.TextChanged += new System.EventHandler(this.rtb_TextChanged);
             // 
             // btnFlash
             // 
@@ -152,20 +143,44 @@
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Location = new System.Drawing.Point(544, 41);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(238, 370);
+            this.groupBox1.Size = new System.Drawing.Size(238, 300);
             this.groupBox1.TabIndex = 11;
             this.groupBox1.TabStop = false;
+            // 
+            // filebox
+            // 
+            this.filebox.FileName = "openFileDialog1";
+            // 
+            // fileBtn
+            // 
+            this.fileBtn.Font = new System.Drawing.Font("Arial Black", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.fileBtn.Location = new System.Drawing.Point(541, 347);
+            this.fileBtn.Name = "fileBtn";
+            this.fileBtn.Size = new System.Drawing.Size(241, 64);
+            this.fileBtn.TabIndex = 12;
+            this.fileBtn.Text = "Open Bin";
+            this.fileBtn.UseVisualStyleBackColor = true;
+            this.fileBtn.Click += new System.EventHandler(this.fileBtn_Click);
+            // 
+            // txtFilePath
+            // 
+            this.txtFilePath.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtFilePath.Location = new System.Drawing.Point(47, 426);
+            this.txtFilePath.Name = "txtFilePath";
+            this.txtFilePath.Size = new System.Drawing.Size(733, 35);
+            this.txtFilePath.TabIndex = 13;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(144F, 144F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(819, 611);
+            this.ClientSize = new System.Drawing.Size(868, 507);
+            this.Controls.Add(this.txtFilePath);
+            this.Controls.Add(this.fileBtn);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.btnFlash);
-            this.Controls.Add(this.rtb);
             this.Controls.Add(this.btn_conenct);
             this.Font = new System.Drawing.Font("Arial", 5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(0);
@@ -177,6 +192,7 @@
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -184,7 +200,6 @@
 
         private System.IO.Ports.SerialPort port;
         private System.Windows.Forms.Button btn_conenct;
-        private System.Windows.Forms.RichTextBox rtb;
         private System.Windows.Forms.Button btnFlash;
         private System.Windows.Forms.Label lblcount;
         private System.Windows.Forms.Label lblAcksCount;
@@ -192,6 +207,9 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.OpenFileDialog filebox;
+        private System.Windows.Forms.Button fileBtn;
+        private System.Windows.Forms.TextBox txtFilePath;
     }
 }
 

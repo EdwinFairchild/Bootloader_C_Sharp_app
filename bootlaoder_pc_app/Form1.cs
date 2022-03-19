@@ -17,7 +17,7 @@ namespace bootlaoder_pc_app
         //I threw all the code in here, but I guess it could go in  a different "Class" ?
         // OOP is not my forte :)
         //but hey, if it builds, ship it! ;)
-        byte[] buff = File.ReadAllBytes("F:\\EclipseWorkSpace\\STM32F4_bootloader_user_app\\Debug\\STM32F4_bootloader_user_app.bin");
+        byte[] buff;//= File.ReadAllBytes("F:\\EclipseWorkSpace\\STM32F4_bootloader_user_app\\Debug\\STM32F4_bootloader_user_app.bin");
         string dataIN;
         byte[] bytes_received = new byte[34];
         int bytes_received_count = 0;
@@ -241,7 +241,7 @@ namespace bootlaoder_pc_app
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
+            btnFlash.Enabled = false;
 
         }
 
@@ -358,6 +358,13 @@ namespace bootlaoder_pc_app
             }
         }
 
-
+        private void fileBtn_Click(object sender, EventArgs e)
+        {
+            filebox.ShowDialog();
+            MessageBox.Show(filebox.FileName.ToString());
+            txtFilePath.Text = filebox.FileName.ToString();
+            buff = File.ReadAllBytes(filebox.FileName.ToString());
+            btnFlash.Enabled = true;
+        }
     }
 }

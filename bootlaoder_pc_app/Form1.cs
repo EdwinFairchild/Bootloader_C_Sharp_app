@@ -361,7 +361,7 @@ namespace bootlaoder_pc_app
         private void fileBtn_Click(object sender, EventArgs e)
         {
             filebox.ShowDialog();
-            MessageBox.Show(filebox.FileName.ToString());
+           // MessageBox.Show(filebox.FileName.ToString());
             txtFilePath.Text = filebox.FileName.ToString();
             buff = File.ReadAllBytes(filebox.FileName.ToString());
             btnFlash.Enabled = true;

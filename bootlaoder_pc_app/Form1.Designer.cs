@@ -143,7 +143,7 @@
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Location = new System.Drawing.Point(544, 41);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(238, 300);
+            this.groupBox1.Size = new System.Drawing.Size(340, 300);
             this.groupBox1.TabIndex = 11;
             this.groupBox1.TabStop = false;
             // 
@@ -156,7 +156,7 @@
             this.fileBtn.Font = new System.Drawing.Font("Arial Black", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.fileBtn.Location = new System.Drawing.Point(541, 347);
             this.fileBtn.Name = "fileBtn";
-            this.fileBtn.Size = new System.Drawing.Size(241, 64);
+            this.fileBtn.Size = new System.Drawing.Size(343, 64);
             this.fileBtn.TabIndex = 12;
             this.fileBtn.Text = "Open Bin";
             this.fileBtn.UseVisualStyleBackColor = true;
@@ -167,7 +167,7 @@
             this.txtFilePath.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtFilePath.Location = new System.Drawing.Point(47, 426);
             this.txtFilePath.Name = "txtFilePath";
-            this.txtFilePath.Size = new System.Drawing.Size(733, 35);
+            this.txtFilePath.Size = new System.Drawing.Size(837, 35);
             this.txtFilePath.TabIndex = 13;
             // 
             // Form1
@@ -175,7 +175,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(144F, 144F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(868, 507);
+            this.ClientSize = new System.Drawing.Size(942, 528);
             this.Controls.Add(this.txtFilePath);
             this.Controls.Add(this.fileBtn);
             this.Controls.Add(this.groupBox1);

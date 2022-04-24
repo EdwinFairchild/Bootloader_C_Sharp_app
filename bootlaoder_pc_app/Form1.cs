@@ -19,6 +19,7 @@ namespace bootlaoder_pc_app
         //but hey, if it builds, ship it! ;)
         byte[] buff;//= File.ReadAllBytes("F:\\EclipseWorkSpace\\STM32F4_bootloader_user_app\\Debug\\STM32F4_bootloader_user_app.bin");
         string dataIN;
+        bool sentStartUpdate = false;
         byte[] bytes_received = new byte[34];
         int bytes_received_count = 0;
         byte[] rx_payload = new byte[16];
@@ -34,6 +35,19 @@ namespace bootlaoder_pc_app
         public const UInt32 BL_NACK_FRAME = 0x43636AEA;
         public const UInt32 PAYLOAD_LEN = 16;
 
+        public struct header_frame_type
+        {
+            public UInt32 start_of_frame;
+            public UInt32 frame_id;
+            public UInt32 magic_num;
+            public UInt32 image_checksum;
+            public UInt32 firmware_ver;
+            public UInt32 image_size;
+            public UInt32 jump_val;
+            public UInt32 crc;            
+            public UInt32 end_of_frame;
+
+        }
         public struct frame_type
         {
             public UInt32 start_of_frame;
@@ -43,8 +57,10 @@ namespace bootlaoder_pc_app
             public UInt32 end_of_frame;
 
         }
+
         public frame_type rx_frame;
         public frame_type tx_frame;
+        public header_frame_type header_frame;
         UInt16 bytes_sent = 0;
         UInt16 stopval = 0;
         bool run = false;
@@ -86,7 +102,7 @@ namespace bootlaoder_pc_app
         MemoryStream buffer = new MemoryStream();
         private void port_DataReceived(object sender, System.IO.Ports.SerialDataReceivedEventArgs e)
         {
-
+            
             for (int i = 0; i < 34; i++)
             {
                 bytes_received[i] = (byte)port.ReadByte();
@@ -99,9 +115,21 @@ namespace bootlaoder_pc_app
             //for testing purposes
             if (rx_frame.frame_id == BL_ACK_FRAME)
             {
-                acksCount++;
-                this.Invoke(new EventHandler(increment_blocks_count));
-                this.Invoke(new EventHandler(sendFirmware));
+               // MessageBox.Show("Acked");
+                if (!sentStartUpdate) //if we havent sent the start update frame send it now
+                {
+
+                    sentStartUpdate = true;
+                    assemble_tx_frame_from_id(BL_START_UPDATE);
+                    serialize_tx_frame_down_port(tx_frame);
+
+                }
+                else //if we did sent it then start sending firmware
+                {
+                    acksCount++;
+                    this.Invoke(new EventHandler(increment_blocks_count));
+                    this.Invoke(new EventHandler(sendFirmware));
+                }
             }
 
         }
@@ -242,7 +270,7 @@ namespace bootlaoder_pc_app
         private void Form1_Load(object sender, EventArgs e)
         {
             btnFlash.Enabled = false;
-
+            btn_conenct.Enabled = false;
         }
 
         private void rtb_TextChanged(object sender, EventArgs e)
@@ -252,9 +280,12 @@ namespace bootlaoder_pc_app
 
         private void btnFlash_Click(object sender, EventArgs e)
         {
+            //send header frame
+            assemble_tx_frame_from_id(BL_HEADER);
+            serialize_header_frame_down_port(header_frame);
             //send the frame to start an update
-            assemble_tx_frame_from_id(BL_START_UPDATE);
-            serialize_tx_frame_down_port(tx_frame);
+            //assemble_tx_frame_from_id(BL_START_UPDATE);
+            //serialize_tx_frame_down_port(tx_frame);
 
         }
 
@@ -307,6 +338,54 @@ namespace bootlaoder_pc_app
                 MessageBox.Show(ex.Message);
             }
         }
+        public void serialize_header_frame_down_port(header_frame_type frame)
+        {
+            try
+            {
+                if (port.IsOpen)
+                {
+                    //SOF uint32
+                    byte[] data = BitConverter.GetBytes(frame.start_of_frame);
+                    port.Write(data, 0, 4);
+                    // frmae id uint32
+                    data = BitConverter.GetBytes(frame.frame_id);
+                    port.Write(data, 0, 4);
+
+                    //magic num
+                    data = BitConverter.GetBytes(frame.magic_num);
+                    port.Write(data, 0, 4);
+
+                    //image checksum
+                    data = BitConverter.GetBytes(frame.image_checksum);
+                    port.Write(data, 0, 4);
+
+                    //firmware version
+                    data = BitConverter.GetBytes(frame.firmware_ver);
+                    port.Write(data, 0, 4);
+
+                    //image size
+                    data = BitConverter.GetBytes(frame.image_size);
+                    port.Write(data, 0, 4);
+
+                    //jump value
+                    data = BitConverter.GetBytes(frame.jump_val);
+                    port.Write(data, 0, 4);
+
+                    //crc uint32
+                    data = BitConverter.GetBytes(frame.crc);
+                    port.Write(data, 0, 4);
+
+                    //end of frame uint32
+                    data = BitConverter.GetBytes(frame.end_of_frame);
+                    port.Write(data, 0, 4);
+                }
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message);
+            }
+        }
         public void assemble_rx_frame_from_port_bytes()
         {
             clear_rx_frame();
@@ -324,15 +403,32 @@ namespace bootlaoder_pc_app
         }
         public void assemble_tx_frame_from_id(UInt32 frame_id)
         {
-            clear_tx_frame();
-            tx_frame.start_of_frame = BL_START_OF_FRAME;
-            tx_frame.frame_id = frame_id;
-            tx_frame.frame_len = 65535; //TODO           
-            tx_frame.crc = 0xFFFFFFFF;//TODO
-            tx_frame.end_of_frame = BL_END_OF_FRAME;
+            if (frame_id == BL_HEADER)
+            {
+                header_frame.start_of_frame = BL_START_OF_FRAME;
+                header_frame.frame_id = BL_HEADER;
+                header_frame.magic_num = (UInt32)(42);
+                header_frame.image_checksum = (UInt32)(43);
+                header_frame.firmware_ver = (UInt32)(1);
+                header_frame.image_size = (UInt32)(16);
+                header_frame.jump_val = (UInt32)(0x8020004);
+                header_frame.crc = (UInt32)(69);
+                header_frame.end_of_frame = BL_END_OF_FRAME;
+
+            }
+            else
+            {
+                clear_tx_frame();
+                tx_frame.start_of_frame = BL_START_OF_FRAME;
+                tx_frame.frame_id = frame_id;
+                tx_frame.frame_len = 65535; //TODO           
+                tx_frame.crc = 0xFFFFFFFF;//TODO
+                tx_frame.end_of_frame = BL_END_OF_FRAME;
+            }
 
 
         }
+
         public void clear_rx_frame()
         {
             rx_frame.start_of_frame = 0;
@@ -365,6 +461,7 @@ namespace bootlaoder_pc_app
             txtFilePath.Text = filebox.FileName.ToString();
             buff = File.ReadAllBytes(filebox.FileName.ToString());
             btnFlash.Enabled = true;
+            btn_conenct.Enabled = true;
         }
     }
 }
